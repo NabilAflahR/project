@@ -13,7 +13,7 @@ class CompanyFactory extends Factory
         return [
             'name' => $this->faker->company(),
             'email' => $this->faker->unique()->companyEmail(),
-            'logo' => 'logos/default.png',
+            'logo' => 'storage/app/public/logos/q5ZkPEtzROVerNO1E0p5xQoPsMN35oW7gweUtAfK.png',
             'description' => $this->faker->sentence(),
         ];
     }

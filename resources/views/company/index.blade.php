@@ -1,17 +1,26 @@
-<x-app-layout>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Companies') }}
             </h2>
             <a href="{{ route('company.create') }}" 
-               class="px-4 py-2 text-indigo-600 rounded-lg shadow ">
+               class="px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-white hover:text-black shadow ">
                 + Add Company
             </a>
         </div>
     </x-slot>
 
-    <div class="py-8 mt-6">
+    <div class="py-1 mt-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <h2 class="text-2xl font-bold mb-6"></h2>
 
@@ -54,6 +63,12 @@
                     </div>
                 @endforeach
             </div>
+            <div class="mt-6">
+                {{ $companies->links() }}
+            </div>
         </div>
     </div>
 </x-app-layout>
+
+</body>
+</html>

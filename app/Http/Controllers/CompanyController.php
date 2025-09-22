@@ -14,7 +14,6 @@ class CompanyController extends Controller
         return view('company.index', compact('companies'));
     }
 
-    // Form tambah company
     public function create()
     {
         return view('company.create');
@@ -26,7 +25,7 @@ class CompanyController extends Controller
         $request->validate([
             'name'        => 'required|string|max:255',
             'email'       => 'nullable|email',
-            'logo'        => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'logo'        => 'nullable|image|mimes:jpg,png,jpeg,gif,svg,webp|max:2048',
             'description' => 'nullable|string'
         ]);
 
@@ -57,7 +56,7 @@ class CompanyController extends Controller
         $request->validate([
             'name'        => 'required|string|max:255',
             'email'       => 'nullable|email',
-            'logo'        => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100',
+            'logo'        => 'nullable|image|mimes:jpg,png,jpeg,gif,svg,webp|max:2048',
             'description' => 'nullable|string'
         ]);
 

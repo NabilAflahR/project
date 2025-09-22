@@ -1,4 +1,7 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+    @php
+    $companyId = request('company_id');
+    @endphp
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -21,19 +24,21 @@
                     </x-nav-link>
 
                     @if (request()->routeIs('employee.*'))
-                        <x-nav-link :href="route('employee.index')"
-                                    :active="request()->routeIs('employee.*')">
+                        <x-nav-link 
+                            :href="route('employee.index', ['company_id' => request()->get('company_id') ?? (request()->route('company')?->id)])"
+                            :active="request()->routeIs('employee.*')">
                             {{ __('Employee') }}
                         </x-nav-link>
                     @endif
-
-                    @if (request()->routeIs('employee.create', 'employee.*'))
-                        <x-nav-link :href="route('employee.create')"
-                                    :active="request()->routeIs('employee.create')">
+                    @if (request()->routeIs('employee.create') || request()->routeIs('employee.*'))
+                        <x-nav-link 
+                            :href="$companyId 
+                                    ? route('employee.create', ['company_id' => $companyId]) 
+                                    : route('employee.create')"
+                            :active="request()->routeIs('employee.create')">
                             {{ __('Add Employee') }}
                         </x-nav-link>
                     @endif
-
                     @if (request()->routeIs('company.edit'))
                         <x-nav-link :href="route('company.edit', request()->route('company'))"
                                     :active="request()->routeIs('company.edit')">
@@ -41,7 +46,6 @@
                         </x-nav-link>
                     @endif
                     
-
 
                     @if (request()->routeIs('company.create','company.index'))
                         <x-nav-link :href="route('company.create', request()->route('company'))"
@@ -52,7 +56,9 @@
 
                     @if (request()->routeIs('employee.edit'))
                         <x-nav-link 
-                            :href="route('employee.edit', ['employeeId' => request()->route('employeeId')])"
+                            :href="$companyId 
+                                    ? route('employee.edit', ['employeeId' => request()->route('employeeId'), 'company_id' => $companyId]) 
+                                    : route('employee.edit', ['employeeId' => request()->route('employeeId')])"
                             :active="request()->routeIs('employee.edit')">
                             {{ __('Edit Employee') }}
                         </x-nav-link>

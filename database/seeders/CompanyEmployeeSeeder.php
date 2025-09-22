@@ -2,21 +2,22 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
 use App\Models\Company;
 use App\Models\Employee;
-use Illuminate\Database\Seeder;
 
 class CompanyEmployeeSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-        $companies = Company::all();
+        // 1. Buat 10 company
+        $companies = Company::factory(10)->create();
 
+        // 2. Untuk tiap company, buat 10 employee
         foreach ($companies as $company) {
-            Employee::factory()->count(10)->create([
-                'companies_id' => $company->id
+            Employee::factory(10)->create([
+                'companies_id' => $company->id, // pastikan kolom di DB sesuai
             ]);
         }
     }
 }
-

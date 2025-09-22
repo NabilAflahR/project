@@ -1,4 +1,13 @@
-<x-app-layout>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -8,20 +17,16 @@
                     All Employees
                 @endisset
             </h2>
-            <a href="{{ isset($company) ? route('employee.create', ['company_id' => $company->id]) : route('employee.create') }}" 
-               class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700">
-                + Add Employee
-            </a>
+            <a href="{{ route('employee.create', ['company_id' => request('company_id')]) }}" class="px-4 py-2 text-white rounded-lg shadow bg-indigo-600 hover:bg-white hover:text-black">+ Add Employee</a>
         </div>
     </x-slot>
 
-    <div class="py-8 mt-6">
+    <div class="py-1 mt-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($employees as $employee)
                     <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-6 flex flex-col">
                         <div class="flex items-center space-x-6 mb-4">
-                            {{-- Logo employee --}}
                             <img src="{{ $employee->logo ? asset('storage/' . $employee->logo) : asset('images/default-logo.png') }}" 
                                  alt="logo" class="h-16 w-16 object-cover rounded-md border">
                             <div>
@@ -32,10 +37,7 @@
                         </div>
 
                         <div class="mt-auto flex space-x-2">
-                            <a href="{{ route('employee.edit', $employee) }}" 
-                               class="flex-1 text-center px-3 py-2 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 text-sm">
-                                Edit
-                            </a>
+                            <a href="{{ route('employee.edit', ['employeeId' => $employee->id, 'company_id' => request('company_id')]) }}" class="flex-1 text-center px-3 py-2 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 text-sm">Edit</a>
                             <form action="{{ route('employee.destroy', $employee) }}" 
                                 method="POST" class="flex-1"
                                 onsubmit="return confirm('Delete This Employee?');">
@@ -60,3 +62,6 @@
         </div>
     </div>
 </x-app-layout>
+
+</body>
+</html>

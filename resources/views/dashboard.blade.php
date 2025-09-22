@@ -1,4 +1,13 @@
-<!-- resources/views/dashboard.blade.php -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- resources/views/dashboard.blade.php -->
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -32,6 +41,20 @@
                 </a>
             </div>
 
+            <!-- Companies & Total Employees -->
+<div class="bg-white rounded-xl shadow-sm mt-6 p-6">
+    <h3 class="text-lg font-bold mb-4">Companies & Total Employees</h3>
+    <ul class="divide-y divide-gray-200">
+        @foreach($companiesWithEmployee as $company)
+            <li class="py-2 flex justify-between">
+                <span>{{ $company['name'] }}</span>
+                <span class="text-sm text-gray-500">
+                    {{ $company['employees'] }} Employee(s)
+                </span>
+            </li>
+        @endforeach
+    </ul>
+</div>
 
             <!-- Data Terbaru Companies -->
             <div class="bg-white rounded-xl shadow-sm">
@@ -70,3 +93,6 @@
         </div>
     </div>
 </x-app-layout>
+
+</body>
+</html>
